@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../common/rootState.type";
 import { Todo } from "../../common/todo.type";
 import { TodoPresenter } from "./TodoPresenter";
-import { add, remove } from "./todoSlice";
+import { add, remove, updateComplete } from "./todoSlice";
 
 export const TodoContainer = () => {
   const todos = useSelector((state: RootState) => state.todos);
@@ -23,10 +23,15 @@ export const TodoContainer = () => {
     dispatch(remove(id));
   };
 
+  const toggleComplete = (id: number) => {
+    dispatch(updateComplete(id));
+  };
+
   const args = {
     todos,
     addTodo,
     removeTodo,
+    toggleComplete,
   };
   return <TodoPresenter {...args} />;
 };
