@@ -4,11 +4,13 @@ import { Todo } from "../../common/todo.type";
 type TodoPresenterProps = {
   todos: Todo[];
   addTodo: (title: string, content: string) => void;
+  removeTodo: (id: number) => void;
 };
 
 export const TodoPresenter: React.FC<TodoPresenterProps> = ({
   todos,
   addTodo,
+  removeTodo,
 }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -52,7 +54,9 @@ export const TodoPresenter: React.FC<TodoPresenterProps> = ({
             </div>
             <div>内容：{todo.content}</div>
             <button type="button">{todo.isCompleted ? "戻す" : "完了"}</button>
-            <button type="button">削除</button>
+            <button type="button" onClick={() => removeTodo(todo.id)}>
+              削除
+            </button>
           </React.Fragment>
         );
       })}
